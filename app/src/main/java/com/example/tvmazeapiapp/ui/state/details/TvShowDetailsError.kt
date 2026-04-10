@@ -46,6 +46,7 @@ fun TvShowDetailsError(
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.error
             )
+
             Button(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFFF5722),
@@ -58,6 +59,7 @@ fun TvShowDetailsError(
             ) {
                 Text("Retry")
             }
+
             Button(
                 onClick = onBackClick,
                 border = BorderStroke(1.dp, cardBorder),
