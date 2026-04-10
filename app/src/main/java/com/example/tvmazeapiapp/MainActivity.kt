@@ -99,7 +99,8 @@ fun TvShowApp(modifier: Modifier = Modifier) {
             if (showId != null) {
                 TvShowDetailsScreen(
                     id = showId,
-                    repository = repository
+                    repository = repository,
+                    onBackClick = { navController.popBackStack() }
                 )
             }
         }
