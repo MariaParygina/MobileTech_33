@@ -1,4 +1,4 @@
-package com.example.my2application.ui.theme
+package com.example.tvmazeapiapp.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -34,7 +34,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun My2ApplicationTheme(
+fun TvMazeApiAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
