@@ -1,4 +1,4 @@
-package com.example.my2application.ui.theme
+package com.example.tvmazeapiapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
