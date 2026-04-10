@@ -1,62 +1,48 @@
-package com.example.tvmazeapiapp.ui.screen
+package com.example.tvmazeapiapp.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tvmazeapiapp.ui.state.TvShowListState
 import com.example.tvmazeapiapp.ui.widgets.TvShowItem
 import com.example.tvmazeapiapp.viewmodel.TvShowListEvent
 import androidx.compose.foundation.shape.RoundedCornerShape
+import com.example.tvmazeapiapp.ui.state.list.TvShowListEmpty
+import com.example.tvmazeapiapp.ui.state.list.TvShowListError
+import com.example.tvmazeapiapp.ui.state.list.TvShowListLoading
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TvShowListScreen(
     state: TvShowListState,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit,
     onEvent: (TvShowListEvent) -> Unit,
     onShowClick: (Int) -> Unit
 ) {
-    var searchQuery by remember { mutableStateOf("") }
-
     when (state) {
         is TvShowListState.Loading -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+            TvShowListLoading()
         }
 
         is TvShowListState.Success -> {
             Scaffold(
                 topBar = {
                     TopAppBar(
-                        title = { Text(
-                            text = "TV Maze Api"
-                        ) }
+                        title = { Text(text = "TV Maze Api") }
                     )
                 }
             ) { innerPadding ->
@@ -68,7 +54,7 @@ fun TvShowListScreen(
                     OutlinedTextField(
                         value = searchQuery,
                         onValueChange = { query ->
-                            searchQuery = query
+                            onSearchQueryChange(query)
                             onEvent(TvShowListEvent.Search(query))
                         },
                         modifier = Modifier
@@ -81,17 +67,8 @@ fun TvShowListScreen(
                     )
 
                     if (state.shows.isEmpty()) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "No shows found",
-                                style = MaterialTheme.typography.bodyLarge
-                            )
-                        }
-                    }
-                    else {
+                        TvShowListEmpty()
+                    } else {
                         Spacer(modifier = Modifier.height(16.dp))
 
                         LazyColumn(
@@ -100,7 +77,7 @@ fun TvShowListScreen(
                             items(state.shows) { show ->
                                 TvShowItem(
                                     show = show,
-                                    onClick = {onShowClick(show.id)}
+                                    onClick = { onShowClick(show.id) }
                                 )
                             }
                         }
@@ -110,24 +87,10 @@ fun TvShowListScreen(
         }
 
         is TvShowListState.Error -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    Text(
-                        text = "Error: ${state.message}",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.error
-                    )
-                    Button(onClick = { onEvent(TvShowListEvent.Retry) }) {
-                        Text("Retry")
-                    }
-                }
-            }
+            TvShowListError(
+                state = state,
+                onEvent = onEvent
+            )
         }
     }
 }

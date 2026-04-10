@@ -13,7 +13,8 @@ data class TvShow(
     val premiered: String,
     val ended: String,
     val officialSite: String,
-    val summary:String
+    val summary: String,
+    val image: Image?
 )
 
 data class Rating(
@@ -28,4 +29,8 @@ data class Network(
 
 data class Country(
     val name: String
+)
+
+data class Image(
+    val medium: String?
 )

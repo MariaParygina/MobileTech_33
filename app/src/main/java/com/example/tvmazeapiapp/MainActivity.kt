@@ -11,13 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import com.example.tvmazeapiapp.data.api.TvMazeApi
 import com.example.tvmazeapiapp.data.repository.TvShowRepository
 import com.example.tvmazeapiapp.di.NetworkModule
-import com.example.tvmazeapiapp.ui.screen.TvShowListScreen
+import com.example.tvmazeapiapp.ui.screens.TvShowListScreen
 import com.example.tvmazeapiapp.ui.theme.TVmazeApiAppTheme
 import com.example.tvmazeapiapp.viewmodel.TvShowListEvent
 import com.example.tvmazeapiapp.viewmodel.TvShowListViewModel
@@ -26,7 +29,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.tvmazeapiapp.ui.screen.TvShowDetailsScreen
+import com.example.tvmazeapiapp.di.ShowRoutes
+import com.example.tvmazeapiapp.ui.screens.TvShowDetailsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,15 +48,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-object ShowRoutes {
-    const val LIST_ROUTE = "showList"
-    const val DETAILS_ROUTE = "showDetails"
-    const val SHOW_ID_ARG = "showId"
-
-    const val DETAILS_ROUTE_PATTERN = "$DETAILS_ROUTE/{$SHOW_ID_ARG}"
-    fun details(showId: Int): String = "$DETAILS_ROUTE/$showId"
-}
-
 @Composable
 fun TvShowApp(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
@@ -66,6 +61,9 @@ fun TvShowApp(modifier: Modifier = Modifier) {
 
     val state by viewModel.state.collectAsState()
 
+    // ← Состояние поиска поднято сюда
+    var searchQuery by remember { mutableStateOf("") }
+
     LaunchedEffect(Unit) {
         viewModel.onEvent(TvShowListEvent.LoadShows)
     }
@@ -77,6 +75,8 @@ fun TvShowApp(modifier: Modifier = Modifier) {
         composable(ShowRoutes.LIST_ROUTE) {
             TvShowListScreen(
                 state = state,
+                searchQuery = searchQuery,  // ← Передаем состояние
+                onSearchQueryChange = { searchQuery = it },  // ← Обновляем состояние
                 onEvent = viewModel::onEvent,
                 onShowClick = { showId ->
                     navController.navigate(ShowRoutes.details(showId))
@@ -92,7 +92,6 @@ fun TvShowApp(modifier: Modifier = Modifier) {
                 }
             )
         ) { backStackEntry ->
-
             val showId = backStackEntry.arguments
                 ?.getInt(ShowRoutes.SHOW_ID_ARG)
 
