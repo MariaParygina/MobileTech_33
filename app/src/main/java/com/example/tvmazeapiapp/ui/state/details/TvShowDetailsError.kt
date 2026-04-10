@@ -1,9 +1,11 @@
 package com.example.tvmazeapiapp.ui.state.details
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -15,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tvmazeapiapp.data.repository.TvShowRepository
+import com.example.tvmazeapiapp.ui.theme.cardBorder
 import com.example.tvmazeapiapp.viewmodel.TvShowDetailsState
 import com.example.tvmazeapiapp.viewmodel.TvShowDetailsViewModel
 import com.example.tvmazeapiapp.viewmodel.TvShowDetailsViewModelFactory
@@ -44,6 +47,11 @@ fun TvShowDetailsError(
                 color = MaterialTheme.colorScheme.error
             )
             Button(
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFF5722),
+                    contentColor = Color.Black
+                ),
+                border = BorderStroke(1.dp, cardBorder),
                 onClick = {
                     viewModel.retry(id)
                 }
@@ -52,8 +60,9 @@ fun TvShowDetailsError(
             }
             Button(
                 onClick = onBackClick,
+                border = BorderStroke(1.dp, cardBorder),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
+                    containerColor = Color(0xFFE1E0E7),
                     contentColor = Color.Black
                 )
             ) {
