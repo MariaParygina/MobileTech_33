@@ -61,7 +61,6 @@ fun TvShowApp(modifier: Modifier = Modifier) {
 
     val state by viewModel.state.collectAsState()
 
-    // ← Состояние поиска поднято сюда
     var searchQuery by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
@@ -75,8 +74,8 @@ fun TvShowApp(modifier: Modifier = Modifier) {
         composable(ShowRoutes.LIST_ROUTE) {
             TvShowListScreen(
                 state = state,
-                searchQuery = searchQuery,  // ← Передаем состояние
-                onSearchQueryChange = { searchQuery = it },  // ← Обновляем состояние
+                searchQuery = searchQuery,
+                onSearchQueryChange = { searchQuery = it },
                 onEvent = viewModel::onEvent,
                 onShowClick = { showId ->
                     navController.navigate(ShowRoutes.details(showId))

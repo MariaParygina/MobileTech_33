@@ -1,5 +1,6 @@
 package com.example.tvmazeapiapp.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -20,6 +22,8 @@ import com.example.tvmazeapiapp.ui.state.TvShowListState
 import com.example.tvmazeapiapp.ui.widgets.TvShowItem
 import com.example.tvmazeapiapp.viewmodel.TvShowListEvent
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.graphics.Color
 import com.example.tvmazeapiapp.ui.state.list.TvShowListEmpty
 import com.example.tvmazeapiapp.ui.state.list.TvShowListError
 import com.example.tvmazeapiapp.ui.state.list.TvShowListLoading
@@ -79,6 +83,22 @@ fun TvShowListScreen(
                                     show = show,
                                     onClick = { onShowClick(show.id) }
                                 )
+                            }
+
+                            item {
+                                Button(
+                                    onClick = { onEvent(TvShowListEvent.LoadMore) },
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(0xFF2196F3),
+                                        contentColor = Color.White
+                                    ),
+                                    border = BorderStroke(1.dp, Color(0xFF21303D)),
+                                ) {
+                                    Text("Load More")
+                                }
                             }
                         }
                     }
