@@ -4,28 +4,28 @@
 
 Экран загрузки приложения:
 
-<img width="465" height="895" alt="image" src="https://github.com/user-attachments/assets/c61298df-8e90-4470-a9e8-12f7888b95c5" />
+<img width="423" height="889" alt="image" src="https://github.com/user-attachments/assets/23c30f9a-8c52-43e2-a431-cbca294bf180" />
 
 Экран ошибки загрузки приложения (при отключенном интернете):
 
-<img width="446" height="892" alt="image" src="https://github.com/user-attachments/assets/99c8a722-8dc7-4bee-8a02-163fde64fd76" />
+<img width="425" height="886" alt="image" src="https://github.com/user-attachments/assets/930f9405-afd1-457c-8ab6-872c201644fd" />
 
 Экран со списком телешоу (TvShowListScreen):
 
-<img width="464" height="893" alt="image" src="https://github.com/user-attachments/assets/ee91dd6a-8edb-4d63-b390-7f3f192375a0" />
+<img width="424" height="886" alt="image" src="https://github.com/user-attachments/assets/267aa827-0dfb-4a0a-8514-97c8e269c9a2" />
 
 Шоу подгружаются в количестве 25 шт., кнопка внизу экрана:
 
-<img width="454" height="893" alt="image" src="https://github.com/user-attachments/assets/e96b20f3-70a9-4302-8ecd-3c99e6018f93" />
+<img width="423" height="886" alt="image" src="https://github.com/user-attachments/assets/e439440d-f7d0-4c7f-bdc9-b1d4d676cce6" />
 
 Экран с деталями телешоу при нажатии на карточку (TvShowDetailsScreen):
 
-<img width="448" height="881" alt="image" src="https://github.com/user-attachments/assets/9ebcc4c5-bd4f-42fc-903e-b9a1dea86afa" />
+<img width="425" height="881" alt="image" src="https://github.com/user-attachments/assets/e86df0eb-172f-4804-a446-a79bed664104" />
 
 Экран загрузки деталей:
 
-<img width="442" height="894" alt="image" src="https://github.com/user-attachments/assets/01256797-a3b3-44e3-abdd-d4261488d475" />
+<img width="425" height="889" alt="image" src="https://github.com/user-attachments/assets/e3a518b0-fbb0-4c2a-b822-30a10002e8dc" />
 
 Экран ошибки загрузки деталей:
 
-<img width="450" height="893" alt="image" src="https://github.com/user-attachments/assets/70227c69-1f07-45b5-85d8-878c013ad70c" />
+<img width="424" height="888" alt="image" src="https://github.com/user-attachments/assets/dd8b1320-ba8a-4b86-8ac1-c8d347281d1e" />
